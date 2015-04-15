@@ -11,11 +11,7 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-
+Route::get('/', array('uses' => 'LoginController@showLogin'));
 Route::get('login', array('uses' => 'LoginController@showLogin'));
 Route::post('login', array('uses' => 'LoginController@sendLogin'));
 Route::get('logout', array('uses' => 'LoginController@doLogout'));

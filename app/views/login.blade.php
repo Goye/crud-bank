@@ -34,12 +34,12 @@
 		    <div class="col-md-10 col-md-offset-1">
 				<p>
 					{{ Form::label('email', 'Email Address') }}
-					{{ Form::text('email', Input::old('email'), array('placeholder' => 'bank@awesome.co')) }}
+					{{ Form::text('email', Input::old('email'), ['placeholder' => 'bank@awesome.co', 'class'=>'form-control']) }}
 				</p>
 
 				<p>
 					{{ Form::label('password', 'Password') }}
-					{{ Form::password('password') }}
+					{{ Form::password('password', ['class'=>'form-control']) }}
 				</p>
 
 				<input type="submit" value="Submit" class="btn btn-primary">
