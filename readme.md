@@ -6,7 +6,7 @@ Crud Bank using Laravel
 git clone https://github.com/Goye/crud-bank.git
 ````
 
-You must configure the vhost to run it
+You must configure the vhost to run it and then execute in the project folder `sudo composer update`
 
 ## Included Awesomeness
 
