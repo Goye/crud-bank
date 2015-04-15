@@ -1,4 +1,4 @@
-Crud Bank
+Crud Bank using Laravel
 
 ## To Run Locally
 
@@ -9,6 +9,13 @@ git clone https://github.com/Goye/crud-bank.git
 You must configure the vhost to run it
 
 ## Included Awesomeness
+
+Before you start, run:
+
+`php artisan migrate`
+`php artisan db:seed`
+
+to populate the DB (it's necesarry configurate the access in app/config/database)
 
 Currently you have a login view and some modules view for the cash in, cash out and the option to edit the profile. 
 

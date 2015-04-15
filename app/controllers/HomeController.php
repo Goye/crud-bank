@@ -1,67 +1,69 @@
 <?php
 
-class HomeController extends BaseController {
+interface iTransactions
+{
+    public function getCashIn($userId);
+    public function getCashOut($userId);
+    //public function transfers($userId);
+}
+
+class HomeController extends \BaseController implements iTransactions {
 
 	/**
-	 * Home controller is the view for the users login
+	 * This function find all the transaction at cash in
+	 * @param  [Integer] $id user id
+	 * @return [Object]   
 	 */
-
-	public function showWelcome()
+	public function getCashIn($id)
 	{
-		return View::make('hello');
+		$values = Transaction::where('user', '=', $id)
+				->where('type', '=', 'Cash in')
+				->get();
+		return View::make('home.cashIn')->with('values',$values)->with('userId', $id);
 	}
 
-	public function showLogin()
+	/**
+	 * This function find all the transaction at cash out
+	 * @param  [Integer] $id user id
+	 * @return [Object]   
+	 */
+	public function getCashOut($id)
 	{
-		// show the login form 
-		return View::make('login');
+		$values = Transaction::where('user', '=', $id)
+				->where('type', '=', 'Cash Out')
+				->get();
+		return View::make('home.cashOut')->with('values',$values)->with('userId', $id);
 	}
 
-	public function doLogout()
+	/**
+	 * edit the information fo the user
+	 * @param  [Integer] $id user
+	 * @return [type]  
+	 */
+	public function getEdit($id)
 	{
-	    Auth::logout(); 
-	    return Redirect::to('login');
+		$user = User::find($id);
+		return View::make('home.account')->with('user',$user);
 	}
 
-	public function sendLogin()
+	/**
+	 * Update the current user
+	 * @param  [Integer]  $id
+	 * @return Response
+	 */
+	public function updateUser($id)
 	{
-		// creates validations for the inputs 
-		$rules = array(
-			'email'    => 'required|email', 
-			'password' => 'required|alphaNum|min:3' 
-		);
-
-		// run the validations 
-		$validator = Validator::make(Input::all(), $rules);
-
-		// if the validator fails, shows the errors 
-		if ($validator->fails()) {
-			return Redirect::to('login')
-				->withErrors($validator) 
-				->withInput(Input::except('password')); 
+		$user = User::find($id);
+		$user->name = Input::get('name');
+		$user->username = Input::get('username');
+		if ($user->save()) {
+			Session::flash('message','Updated successfully!');
+			Session::flash('class','success');
 		} else {
-
-			$userdata = array(
-				'email' 	=> Input::get('email'),
-				'password' 	=> Input::get('password')
-			);
-
-			// authenticate the user
-			if (Auth::attempt($userdata)) {
-
-				//success now redirect to the internal views
-				echo 'SUCCESS!';
-
-			} else {
-
-				// validation not successful, shows an error
-				Session::flash('message','The email address or password you entered do not match.');
-				Session::flash('class','danger');
-				return Redirect::to('login');
-
-			}
-
+			Session::flash('message','Sorry, an error has occurred!');
+			Session::flash('class','danger');
 		}
+		return Redirect::to('home/edit/'.$id);
 	}
 
 }

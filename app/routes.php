@@ -16,6 +16,11 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('login', array('uses' => 'HomeController@showLogin'));
-Route::post('login', array('uses' => 'HomeController@sendLogin'));
-Route::get('logout', array('uses' => 'HomeController@doLogout'));
+Route::get('login', array('uses' => 'LoginController@showLogin'));
+Route::post('login', array('uses' => 'LoginController@sendLogin'));
+Route::get('logout', array('uses' => 'LoginController@doLogout'));
+Route::post('/update-user/{id}','HomeController@updateUser');
+Route::get('/cash-in/{id}','HomeController@getCashIn');
+Route::get('/cash-out/{id}','HomeController@getCashOut');
+
+Route::controller('home','HomeController');
