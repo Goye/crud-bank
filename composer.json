@@ -31,5 +31,9 @@
 	"config": {
 		"preferred-install": "dist"
 	},
+	"require-dev": {
+		"way/laravel-test-helpers": "dev-master",
+		"phpunit/phpunit": "4.0.*"
+	},
 	"minimum-stability": "dev"
 }

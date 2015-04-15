@@ -17,10 +17,15 @@ Before you start, run:
 
 to populate the DB (it's necesarry configurate the access in app/config/database)
 
-Currently you have a login view and some modules view for the cash in, cash out and the option to edit the profile. 
+Currently you have a login view and some modules view for the cash in, cash out and the option to edit the profile.
 
 ## Testing
-Under construction
+
+Run the following command to create the alias:
+
+`alias phpunit="./vendor/bin/phpunit"`
+
+To run the test put `phpunit
 
 ## Stack Objectives
 
@@ -31,6 +36,6 @@ Under construction
   - Profile (name, address, login, password)
   - Balances
   - Transactions
-  - Sessions 
+  - Sessions
 
 Questions, Concerns, Ideas or Anolomies, please direct to [@Goye-says](karlos.goye@gmail.com or karlos.goye92@hotmail.com)
